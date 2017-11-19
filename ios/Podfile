@@ -1,31 +1,31 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'ColorMEManager' do
+target 'Alibaba Manage' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
   # use_frameworks!
 
-  # Pods for ColorMEManager
-  pod 'MobileCenter/Crashes', '~> 0.12.1'
-  pod 'MobileCenter/Analytics', '~> 0.12.1'
-  pod 'RNMobileCenterShared', '~> 0.9.0'
+  # Pods for Alibaba Manage
+  pod 'AppCenter/Crashes', '~> 1.0.1'
+  pod 'AppCenter/Analytics', '~> 1.0.1'
+  pod 'AppCenterReactNativeShared', '~> 1.0.1'
 
   
 
-  target 'ColorMEManagerTests' do
+  target 'Alibaba ManageTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
 end
 
-target 'ColorMEManager-tvOS' do
+target 'Alibaba Manage-tvOS' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
   # use_frameworks!
 
-  # Pods for ColorMEManager-tvOS
+  # Pods for Alibaba Manage-tvOS
 
-  target 'ColorMEManager-tvOSTests' do
+  target 'Alibaba Manage-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end
