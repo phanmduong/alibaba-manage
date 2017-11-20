@@ -119,7 +119,7 @@ class DashboardContainer extends React.Component {
         if (props.genData.length > 0 && props.baseData.length > 0 && !this.state.checkedDataDashboard) {
             this.setState({checkedDataDashboard: true});
             this.props.dashboardActions
-                .loadDataDashboard(-1, props.genData[1].id, this.props.token);
+                .loadDataDashboard(-1, props.genData[0].id, this.props.token);
         }
     }
 

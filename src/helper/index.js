@@ -6,6 +6,7 @@ export function dotNumber(number) {
     if (number) {
         return number.toString().replace(/\./g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
+    return 0;
 }
 
 export function maxArray(arr) {
