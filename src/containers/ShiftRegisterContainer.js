@@ -1,7 +1,7 @@
 /**
  * Created by phanmduong on 4/24/17.
  */
-import React from'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import ShiftRegisterComponent from '../components/ShiftRegisterComponent';
@@ -10,16 +10,19 @@ import * as genActions from '../actions/genActions';
 import * as shiftRegisterActions from '../actions/shiftRegisterActions';
 import _ from 'lodash';
 import io from 'socket.io-client';
+import {SOCKET_CHANNEL, SOCKET_URL} from "../constants/env";
 
 class ShiftRegisterContainer extends React.Component {
     constructor(props, context) {
         super(props, context);
-        this.socket = io.connect("http://colorme.vn:3000/", {transports: ['websocket']});
+        this.socket = io.connect(SOCKET_URL, {transports: ['websocket']});
 
-        this.socket.on('colorme-channel:regis-shift', (data) => {
+        this.socket.on(SOCKET_CHANNEL + ':regis-shift', (data) => {
+            console.log(data);
             this.props.shiftRegisterActions.updateDataRegister(data);
         });
-        this.socket.on('colorme-channel:remove-shift', (data) => {
+        this.socket.on(SOCKET_CHANNEL + ':remove-shift', (data) => {
+            console.log(data);
             this.props.shiftRegisterActions.updateDataRegister(data);
         });
 
@@ -76,13 +79,13 @@ class ShiftRegisterContainer extends React.Component {
         this.checkData(nextProps);
     }
 
-    checkData(props){
-        if (props.baseData.length > 0 && !this.state.checkedDataBase){
+    checkData(props) {
+        if (props.baseData.length > 0 && !this.state.checkedDataBase) {
             this.setState({checkedDataBase: true});
             this.props.shiftRegisterActions.selectedBaseId(props.baseData[0].id);
         }
 
-        if (props.genData.length > 0 && !this.state.checkedDataGen){
+        if (props.genData.length > 0 && !this.state.checkedDataGen) {
             this.setState({checkedDataGen: true});
             var genData = _.sortBy(props.genData, [function (o) {
                 return parseInt(o.name);
@@ -91,13 +94,13 @@ class ShiftRegisterContainer extends React.Component {
             this.setState({
                 genData: genData
             })
-            this.props.shiftRegisterActions.selectedGenId(genData[0].id);
+            this.props.shiftRegisterActions.selectedGenId(props.currentGen.id);
         }
 
         if (props.genData.length > 0 && props.baseData.length > 0 && !this.state.checkedDataShiftRegister) {
             this.setState({checkedDataShiftRegister: true});
             this.props.shiftRegisterActions
-                .loadDataShiftRegister(props.baseData[0].id, props.genData[0].id, this.props.token);
+                .loadDataShiftRegister(props.baseData[0].id, props.currentGen.id, this.props.token);
         }
     }
 
@@ -165,9 +168,11 @@ function mapStateToProps(state) {
     return {
         isLoadingBase: state.base.isLoading,
         baseData: state.base.baseData,
+
         errorBase: state.base.error,
         token: state.login.token,
         isLoadingGen: state.gen.isLoading,
+        currentGen: state.gen.currentGen,
         genData: state.gen.genData,
         errorGen: state.gen.error,
         isLoadingShiftRegister: state.shiftRegister.isLoading,

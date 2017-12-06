@@ -34,7 +34,8 @@ export default {
         genData: [],
         isLoading: false,
         error: false,
-        selectedGenId: -1
+        selectedGenId: -1,
+        currentGen: 0,
     },
     lessonCourse: {
         lessonCourseData: [],

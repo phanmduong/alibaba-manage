@@ -1,7 +1,7 @@
 /**
  * Created by phanmduong on 4/24/17.
  */
-import React from'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {Text, Alert} from 'react-native';
 import {bindActionCreators} from 'redux';
@@ -11,7 +11,10 @@ import HistoryMoneyTransferComponent from '../components/moneyTransfer/HistoryMo
 import SearchStaffMoneyTransferComponent from '../components/moneyTransfer/SearchStaffMoneyTransferComponent';
 import * as alert from '../constants/alert';
 import io from 'socket.io-client';
+import {SOCKET_CHANNEL, SOCKET_URL} from "../constants/env";
+
 let self;
+
 class MoneyTransferContainer extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -22,9 +25,9 @@ class MoneyTransferContainer extends React.Component {
         this.rejectTransaction = this.rejectTransaction.bind(this);
         this.acceptTransaction = this.acceptTransaction.bind(this);
         self = this;
-        this.socket = io.connect("http://colorme.vn:3000/", {transports: ['websocket']});
+        this.socket = io.connect(SOCKET_URL, {transports: ['websocket']});
 
-        this.socket.on('colorme-channel:notification', (data) => {
+        this.socket.on(SOCKET_CHANNEL + ':notification', (data) => {
             if (data.notification && data.notification.transaction) {
                 this.props.moneyTransferActions.updateHistoryTransactionWithSocket(this.props.token);
             }
@@ -127,6 +130,7 @@ class MoneyTransferContainer extends React.Component {
         }
     }
 }
+
 function mapStateToProps(state) {
     return {
         token: state.login.token,
