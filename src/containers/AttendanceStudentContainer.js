@@ -35,7 +35,7 @@ class AttendanceStudentContainer extends React.Component {
     }
 
     onLoadDataStudent() {
-        this.props.attendanceStudentActions.loadInfoStudent(this.props.studentCode, this.props.token);
+        this.props.attendanceStudentActions.loadInfoStudent("AEC1", this.props.token);
     }
 
 
@@ -80,8 +80,8 @@ class AttendanceStudentContainer extends React.Component {
         this.props.navigation.goBack();
     }
 
-    updateAttendance(attendanceId) {
-        this.props.attendanceStudentActions.updateAttendanceStudent(attendanceId, this.props.token);
+    updateAttendance(attendanceId, status, hw_status) {
+        this.props.attendanceStudentActions.updateAttendanceStudent(attendanceId, status, hw_status, this.props.token);
     }
 
     render() {

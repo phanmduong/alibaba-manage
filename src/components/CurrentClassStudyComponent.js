@@ -1,4 +1,4 @@
-import React from'react';
+import React from 'react';
 import {Dimensions} from 'react-native';
 import {
     Container,
@@ -14,9 +14,11 @@ import {
     Thumbnail,
 } from 'native-base';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+
 var {height, width} = Dimensions.get('window');
 import * as alert from '../constants/alert';
 import Loading from '../components/common/Loading';
+import {convertHttp} from "../helper/index";
 
 class ClassComponent extends React.Component {
     constructor(props, context) {
@@ -57,7 +59,7 @@ class ClassComponent extends React.Component {
                                         }}
                                         button
                                     >
-                                        <Thumbnail small source={{uri: item.avatar_url}}/>
+                                        <Thumbnail small source={{uri: convertHttp(item.avatar_url)}}/>
                                         <Body>
                                         <Text>{item.name}</Text>
                                         <Text note>{item.study_time}</Text>

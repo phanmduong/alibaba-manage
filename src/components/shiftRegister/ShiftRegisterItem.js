@@ -1,10 +1,11 @@
-import React from'react';
+import React from 'react';
 import {Image} from 'react-native'
 import {
     View,
     Text,
     Button
 } from 'native-base';
+import {convertHttp} from "../../helper/index";
 
 
 class ShiftRegisterItem extends React.Component {
@@ -37,7 +38,7 @@ class ShiftRegisterItem extends React.Component {
                             onPress={() => onUnRegister(shift.id)}>
                         <Image
                             style={styles.avatar}
-                            source={{uri: shift.user.avatar_url}}
+                            source={{uri: convertHttp(shift.user.avatar_url)}}
                         />
                         <Text style={styles.textRegisteredByUser}>
                             {(shift.isLoadingUnRegisterError) ?
@@ -51,7 +52,7 @@ class ShiftRegisterItem extends React.Component {
                     <View style={styles.registered}>
                         <Image
                             style={styles.avatar}
-                            source={{uri: shift.user.avatar_url}}
+                            source={{uri: convertHttp(shift.user.avatar_url)}}
                         />
                         <Text style={styles.textRegistered}>{shift.user.name}</Text>
                     </View>

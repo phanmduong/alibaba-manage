@@ -27,12 +27,22 @@ export function formatPhone(phone) {
 }
 
 export function typeConnect(type) {
-    if (type.toLowerCase() == 'wifi'){
+    if (type.toLowerCase() == 'wifi') {
         return 'Wifi';
     }
-    if (type.toLowerCase() == 'mobile'){
+    if (type.toLowerCase() == 'mobile') {
         return 'Điện thoại';
     }
     return '';
 
+}
+
+export function isEmptyInput(input) {
+    return input === null || input === undefined || input.toString().trim().length <= 0;
+}
+
+export function convertHttp(url) {
+    if (isEmptyInput(url)) return url;
+    if (url.substr(0, 4) === 'http') return url;
+    return 'http://' + url;
 }

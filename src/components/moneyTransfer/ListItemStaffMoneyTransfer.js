@@ -1,4 +1,4 @@
-import React from'react';
+import React from 'react';
 import {Dimensions, Platform, TouchableNativeFeedback, TouchableOpacity} from 'react-native';
 import {
     View,
@@ -11,9 +11,11 @@ import {
 import theme from '../../styles';
 import Call from '../common/Call';
 import Spinkit from 'react-native-spinkit';
+import {convertHttp} from "../../helper/index";
 
 var {height, width} = Dimensions.get('window');
 var maxWidthProcess = width / 2;
+
 class ListItemStaffMoneyTransfer extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -32,7 +34,7 @@ class ListItemStaffMoneyTransfer extends React.Component {
         const {name, avatar, email, phone} = this.props;
         return (
             <View style={styles.container}>
-                <Thumbnail small source={{uri: avatar}}/>
+                <Thumbnail small source={{uri: convertHttp(avatar)}}/>
                 <View style={styles.contentLeft}>
                     <View style={styles.content}>
                         <View style={styles.containerTitle}>
@@ -48,7 +50,9 @@ class ListItemStaffMoneyTransfer extends React.Component {
                     </View>
                     <TouchableOpacity
                         style={styles.buttonMoneyTransfer}
-                        onPress={() => {!this.props.isTransaction && this.props.postTransaction(this.props.userId)}}
+                        onPress={() => {
+                            !this.props.isTransaction && this.props.postTransaction(this.props.userId)
+                        }}
                     >
                         {(this.props.isTransaction) ? (
                             <View style={styles.containerLoading}>
@@ -189,7 +193,7 @@ const styles = ({
         height: 25,
         justifyContent: 'center',
         alignItems: 'center',
-        width: width/3.5,
+        width: width / 3.5,
         backgroundColor: theme.secondColor,
         padding: 5,
         borderRadius: 5

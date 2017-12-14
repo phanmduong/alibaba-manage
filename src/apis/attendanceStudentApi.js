@@ -9,11 +9,11 @@ export function getInfoStudentApi(studentCode, token) {
     return axios.get(url);
 }
 
-export function postAttendanceStudentApi(attendanceId, token) {
+export function postAttendanceStudentApi(attendanceId, status = null, hw_status = null, token) {
     let url = env.API_URL + "/attendances/" + attendanceId + "?token=" + token;
-    return axios.post(url,{
-        status : 1,
-        hw_status : 1
+    return axios.post(url, {
+        status: status ? status : 0,
+        hw_status: hw_status ? hw_status : 0,
     });
 }
 

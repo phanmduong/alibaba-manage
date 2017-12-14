@@ -12,6 +12,7 @@ import {
 } from 'native-base';
 import { DrawerItems } from 'react-navigation';
 import theme from '../styles';
+import {convertHttp} from "../helper/index";
 
 var {height, width} = Dimensions.get('window');
 class SidebarComponent extends React.Component {
@@ -27,7 +28,7 @@ class SidebarComponent extends React.Component {
                     style={{ flex: 1, backgroundColor: '#fff', top: -1 }}
                 >
                     <View style={styles.header}>
-                        <Thumbnail size={55} source={{uri: this.props.user.avatar_url}}/>
+                        <Thumbnail size={55} source={{uri: convertHttp(this.props.user.avatar_url)}}/>
                         <Text style={styles.headerTitle}>{this.props.user.name}</Text>
                         <Text style={styles.subTitle}>Chỉnh sửa thông tin</Text>
                     </View>

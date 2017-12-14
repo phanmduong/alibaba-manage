@@ -5,9 +5,9 @@ import * as types from '../constants/actionTypes';
 import * as attendanceStudentApi from '../apis/attendanceStudentApi';
 
 export function beginGetInforStudent() {
-    return{
+    return {
         type: types.BEGIN_GET_INFOR_STUDENT,
-        isLoadingInfoStudent : true,
+        isLoadingInfoStudent: true,
         errorLoad: false,
         messageError: undefined
     };
@@ -36,7 +36,8 @@ export function loadedInforStudentSuccessful(res) {
 }
 
 export function loadedInforStudentError(res) {
-    return {type: types.LOAD_GET_INFOR_STUDENT_ERROR,
+    return {
+        type: types.LOAD_GET_INFOR_STUDENT_ERROR,
         isLoadingInfoStudent: false,
         errorLoad: true,
         messageError: res.error
@@ -44,17 +45,17 @@ export function loadedInforStudentError(res) {
 }
 
 export function beginPostAttendaceStudent() {
-    return{
+    return {
         type: types.BEGIN_POST_ATTENDANCE_STUDENT,
         isUpdatingAttendanceStudent: true,
         errorUpdate: false,
     };
 }
 
-export function updateAttendanceStudent(attendanceId, token) {
+export function updateAttendanceStudent(attendanceId, status, hw_status, token) {
     return function (dispatch) {
         dispatch(beginPostAttendaceStudent());
-        attendanceStudentApi.postAttendanceStudentApi(attendanceId, token).then(function (res) {
+        attendanceStudentApi.postAttendanceStudentApi(attendanceId, status, hw_status, token).then(function (res) {
             dispatch(updateAttendanceStudentSuccessful(res));
         }).catch(error => {
             dispatch(updateAttendanceStudentError());
@@ -76,21 +77,22 @@ export function updateAttendanceStudentSuccessful(res) {
 }
 
 export function updateAttendanceStudentError() {
-    return {type: types.LOAD_POST_ATTENDANCE_STUDENT_ERROR,
+    return {
+        type: types.LOAD_POST_ATTENDANCE_STUDENT_ERROR,
         isUpdatingAttendanceStudent: false,
         errorUpdate: true,
     }
 }
 
 export function selectButtonEnterStudentCode(studentCode) {
-    return{
+    return {
         type: types.SELECT_BUTTON_ENTER_STUDENT_CODE,
         studentCode: studentCode,
     };
 }
 
 export function scannedQRCode(studentCode) {
-    return{
+    return {
         type: types.SCANNED_QR_CODE,
         studentCode: studentCode
     };

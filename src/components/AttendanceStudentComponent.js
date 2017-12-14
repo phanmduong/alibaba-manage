@@ -5,7 +5,7 @@ import {
     Button,
     List,
     View,
-    Text
+    Text, CheckBox, Body
 } from 'native-base';
 
 var {height, width} = Dimensions.get('window');
@@ -13,20 +13,25 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import theme from '../styles';
 import Loading from '../components/common/Loading';
 import * as alert from '../constants/alert';
+import {convertHttp} from "../helper/index";
 
 class AttendanceStudentComponent extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.renderRow = this.renderRow.bind(this);
         this.updateAttendance = this.updateAttendance.bind(this);
+        this.state = {
+            hw_status: false,
+            status: true,
+        }
     }
 
 
     updateAttendance() {
-        let attendanceId = this.props.student.attendances.filter( (attendances) => {
+        let attendanceId = this.props.student.attendances.filter((attendances) => {
             return attendances.order == this.props.orderLessonCourse;
         })[0].id;
-        this.props.onUpdateAttendance(attendanceId);
+        this.props.onUpdateAttendance(attendanceId, this.state.status, this.state.hw_status);
     }
 
     render() {
@@ -55,10 +60,10 @@ class AttendanceStudentComponent extends React.Component {
                         <View style={styles.containerFlex2}>
                             <Image
                                 source={
-                                    (!this.props.student.avatar_url || this.props.student.avatar_url === '') ? (
+                                    (!this.props.student.avatar_url || convertHttp(this.props.student.avatar_url) === '') ? (
                                             require('../../assets/img/colorme.jpg')
                                         ) :
-                                        ({uri: this.props.student.avatar_url})}
+                                        ({uri: convertHttp(this.props.student.avatar_url)})}
                                 style={styles.image}
                             />
                         </View>
@@ -73,6 +78,16 @@ class AttendanceStudentComponent extends React.Component {
                                 dataArray={this.props.student.attendances}
                                 renderRow={this.renderRow}
                             />
+                            <View style={styles.containerCheckBox}>
+                                <CheckBox checked={this.state.hw_status}
+                                          onPress={() => this.setState({hw_status: !this.state.hw_status})}/>
+                                <Text style={{marginLeft: 20}}>Bài tập</Text>
+                            </View>
+                            <View style={{...styles.containerCheckBox, marginTop: 10}}>
+                                <CheckBox checked={this.state.status}
+                                          onPress={() => this.setState({status: !this.state.status})}/>
+                                <Text style={{marginLeft: 20}}>Đi học</Text>
+                            </View>
                         </View>
                         <View style={styles.viewButton}>
                             <Button
@@ -206,6 +221,13 @@ const styles = ({
     textError: {
         color: '#d9534f',
         textAlign: 'center'
+    },
+    containerCheckBox: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: width - width / 8
     }
 });
 

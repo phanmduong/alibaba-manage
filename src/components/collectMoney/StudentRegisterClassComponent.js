@@ -8,6 +8,7 @@ import ListItemRegisterStudentClass from './ListItemRegisterStudentClass';
 import theme from '../../styles';
 import Call from '../common/Call';
 import Modal from 'react-native-modalbox';
+import {convertHttp} from "../../helper/index";
 
 let {height, width} = Dimensions.get('window');
 let self;
@@ -37,7 +38,7 @@ class StudentRegisterClassComponent extends React.Component {
                 <View style={styles.containerInfoStudent}>
                     <Image
                         style={styles.image}
-                        source={{uri: avatar_url}}
+                        source={{uri: convertHttp(avatar_url)}}
                     />
                     <View style={styles.content}>
                         <View style={styles.containerTitle}>
@@ -74,7 +75,7 @@ class StudentRegisterClassComponent extends React.Component {
                     }}
                 >
                     <View style={styles.containerModal}>
-                        <Thumbnail large source={{uri: this.state.student.avatar_url}}/>
+                        <Thumbnail large source={{uri: convertHttp(this.state.student.avatar_url)}}/>
                         <Text style={styles.nameStudent}>{this.state.student.name}</Text>
                         <Text style={styles.nameClass}>{this.state.register.class}</Text>
                         <Text style={styles.phone}>{this.state.student.phone}</Text>

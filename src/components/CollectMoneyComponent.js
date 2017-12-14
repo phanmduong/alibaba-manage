@@ -19,7 +19,7 @@ import Search from './common/Search';
 import ListItemStudentCollectMoney from "./collectMoney/ListItemStudentCollectMoney";
 import Modal from 'react-native-modalbox';
 import Call from './common/Call';
-import {dotNumber}from '../helper/index';
+import {convertHttp, dotNumber} from '../helper/index';
 
 var {height, width} = Dimensions.get('window');
 let self;
@@ -193,7 +193,7 @@ class CollectMoneyComponent extends React.Component {
                         {(!this.state.isKeyboardShow) ?
                             (
                                 <View style={styles.containerInfoStudent}>
-                                    <Thumbnail large source={{uri: this.state.student.avatar_url}}/>
+                                    <Thumbnail large source={{uri: convertHttp(this.state.student.avatar_url)}}/>
                                     <View style={styles.contentInfoStudent}>
                                         <Text
                                             style={styles.nameStudent}
