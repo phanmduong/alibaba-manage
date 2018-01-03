@@ -1,12 +1,12 @@
 import React from 'react';
-import {Image} from 'react-native'
+import {Dimensions, Image} from 'react-native'
 import {
     View,
     Text,
     Button
 } from 'native-base';
 import {convertHttp} from "../../helper/index";
-
+var {height, width} = Dimensions.get('window');
 
 class ShiftRegisterItem extends React.Component {
     constructor(props, context) {
@@ -74,6 +74,7 @@ class ShiftRegisterItem extends React.Component {
 
 const styles = {
     register: {
+        width: width - 55,
         backgroundColor: '#4dc151',
         marginVertical: 5,
         padding: 5,
@@ -84,6 +85,7 @@ const styles = {
         flexDirection: 'row',
     },
     registered: {
+        width: width - 55,
         backgroundColor: '#bdbdbd',
         marginVertical: 5,
         padding: 5,
@@ -94,6 +96,7 @@ const styles = {
         height: 40,
     },
     registeredByUser: {
+        width: width - 55,
         backgroundColor: '#d9534f',
         marginVertical: 5,
         padding: 5,

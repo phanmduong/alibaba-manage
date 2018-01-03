@@ -1,5 +1,5 @@
-import React from'react';
-import {StyleSheet, Image} from 'react-native'
+import React from 'react';
+import {StyleSheet, Image, Dimensions} from 'react-native'
 import {
     View,
     Text,
@@ -10,7 +10,9 @@ import {
 } from 'native-base';
 import _ from 'lodash';
 import ShiftRegisterItem from './ShiftRegisterItem';
+
 var self;
+var {height, width} = Dimensions.get('window');
 
 class ShiftRegisterDate extends React.Component {
     constructor(props, context) {
@@ -64,10 +66,12 @@ const styles = {
         marginHorizontal: 10
     },
     date: {
+        width: width - 55,
         padding: 5,
         borderBottomColor: '#d3d3d3',
         borderBottomWidth: 1,
         marginBottom: 5,
+
     },
     register: {
         backgroundColor: '#4dc151',

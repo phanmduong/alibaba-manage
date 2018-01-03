@@ -1,4 +1,4 @@
-import React from'react';
+import React from 'react';
 import {Dimensions, Platform, TouchableNativeFeedback, TouchableOpacity} from 'react-native';
 import {
     View,
@@ -10,9 +10,11 @@ import {
 import theme from '../../styles';
 import Call from '../common/Call';
 import ListItemRegisterStudentClass from './ListItemRegisterStudentClass';
+import {convertHttp} from "../../helper/index";
 
 var {height, width} = Dimensions.get('window');
 var maxWidthProcess = width / 2;
+
 class ListItemStudentCollectMoney extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -31,7 +33,7 @@ class ListItemStudentCollectMoney extends React.Component {
         const {name, avatar, email, phone} = this.props;
         return (
             <View style={styles.container}>
-                <Thumbnail small source={{uri: avatar}}/>
+                <Thumbnail small source={{uri: convertHttp(avatar)}}/>
                 <View style={styles.content}>
                     <View style={styles.containerTitle}>
                         <Text style={styles.title}>{name.trim().toUpperCase()}</Text>

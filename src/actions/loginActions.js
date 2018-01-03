@@ -40,7 +40,7 @@ export function loginUser(login) {
                 }
                 dispatch(openMainScreen(res));
                 dispatch(changeStatusBarColor('light-content'));
-                dispatch(changeStatusTransaction(res.data.user));
+                // dispatch(changeStatusTransaction(res.data.user));
             });
         }).catch(error => {
             dispatch(loginError());

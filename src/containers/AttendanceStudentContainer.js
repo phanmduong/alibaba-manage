@@ -35,7 +35,7 @@ class AttendanceStudentContainer extends React.Component {
     }
 
     onLoadDataStudent() {
-        this.props.attendanceStudentActions.loadInfoStudent("AEC1", this.props.token);
+        this.props.attendanceStudentActions.loadInfoStudent(this.props.studentCode, this.props.token);
     }
 
 
